@@ -1,8 +1,8 @@
 import {connect} from "react-redux"
-import Home from "../components/home"
+import Main from "../components/main"
 
 export default connect(state => ({
 
 }),{
 
-})(Home);
+})(Main);
