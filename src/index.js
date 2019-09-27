@@ -5,6 +5,7 @@ import App from "./containers/app"
 import store from "./store"
 import "./assets/css/global.less"
 
-ReactDOM.render(<Provider store={store}>
-    <App/>
-</Provider>,document.getElementById("root"));
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>, document.getElementById("root"));

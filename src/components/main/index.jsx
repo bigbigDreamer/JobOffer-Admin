@@ -1,8 +1,10 @@
 import React, {Component} from "react"
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom"
-import {Row, Col, Button} from "antd"
+import {BrowserRouter} from "react-router-dom"
+import {Row} from "antd"
 import SiderNav from "../sider_nav"
+import Header from "../header"
 import "./main.less"
+import {Router} from "../../router"
 
 
 export default class Main extends Component {
@@ -10,32 +12,26 @@ export default class Main extends Component {
         return (
             <BrowserRouter>
                 <div className={"main"}>
-                    <Row>
-                        <Col span={7}>
-                            {/*侧栏导航*/}
-                            <div className="sideNav">
-                                <SiderNav/>
-                            </div>
-                        </Col>
-                        <Col span={17}>
-                            {/* 右侧头 */}
-                            <div className="header">
-                                <Row>
-
-                                </Row>
-                            </div>
-                            {/*右侧内容*/}
-                            <div className="content">
-                                <Button type={"primary"}>你好</Button>
-                                {/*主内容区域*/}
-                                <Row>
-                                    <Switch>
-                                        <Route/>
-                                    </Switch>
-                                </Row>
-                            </div>
-                        </Col>
-                    </Row>
+                    {/*侧栏导航*/}
+                    <div className="sideNav">
+                        <SiderNav/>
+                    </div>
+                    <div className="right">
+                        {/* 右侧头 */}
+                        <div className="header">
+                            <Row>
+                                <Header/>
+                            </Row>
+                        </div>
+                        {/*右侧内容*/}
+                        <div className="content">
+                            {/*主内容区域*/}
+                            <Row>
+                                {/*路由组件*/}
+                                <Router/>
+                            </Row>
+                        </div>
+                    </div>
                 </div>
             </BrowserRouter>
         )

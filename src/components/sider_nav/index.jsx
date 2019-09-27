@@ -1,9 +1,9 @@
 import React, {Component} from "react"
-import {Menu, Icon, Button} from 'antd';
+import {Menu, Icon} from 'antd';
 import "./sider_nav.less"
+import {Link,Router} from "react-router-dom"
 import logo from "../../assets/img/logo.png"
 
-const {SubMenu} = Menu;
 
 export default class SiderNav extends Component {
     state = {
@@ -14,6 +14,11 @@ export default class SiderNav extends Component {
         this.setState({
             collapsed: !this.state.collapsed,
         });
+    };
+    handleChangeMenu = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+        // const {history} = this.props;
+        console.log(this.props);
+
     };
 
     render() {
@@ -27,19 +32,24 @@ export default class SiderNav extends Component {
                     {/*    <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />*/}
                     {/*</Button>*/}
                     <Menu
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
+                        defaultSelectedKeys={['home']}
                         mode="inline"
                         theme="dark"
                         inlineCollapsed={this.state.collapsed}
+                        onSelect={this.handleChangeMenu}
                     >
-                        <Menu.Item key="1" className={"menu_item"}>
+                        <Menu.Item key="home" className={"menu_item"}>
+                            <Link to={"/"}>
                             <Icon type="home"/>
                             <span>首页</span>
+                            </Link>
                         </Menu.Item>
-                        <Menu.Item key="2" className={"menu_item"}>
+
+                        <Menu.Item key="business" className={"menu_item"}>
+                            <Link to={"/business"}>
                             <Icon type="copyright"/>
                             <span>商家管理</span>
+                            </Link>
                         </Menu.Item>
                         <Menu.Item key="3" className={"menu_item"}>
                             <Icon type="profile"/>

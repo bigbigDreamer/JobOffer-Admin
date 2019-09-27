@@ -49,6 +49,6 @@ $ npm  build
 $ yarn build
 ```
 
-## License 还好吧
+## License 
 
 [MIT]().Copyright (c) 2019 Eric Wang
