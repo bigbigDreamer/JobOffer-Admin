@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {Menu, Icon} from 'antd';
 import "./sider_nav.less"
-import {Link,Router} from "react-router-dom"
+import {Link} from "react-router-dom"
 import logo from "../../assets/img/logo.png"
 
 
@@ -17,7 +17,7 @@ export default class SiderNav extends Component {
     };
     handleChangeMenu = ({ item, key, keyPath, selectedKeys, domEvent }) => {
         // const {history} = this.props;
-        console.log(this.props);
+        // console.log(this.props);
 
     };
 

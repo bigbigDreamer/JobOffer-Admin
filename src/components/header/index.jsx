@@ -7,7 +7,7 @@ export default class Index extends Component {
         return (
             // 头部
             <div className={"header"}>
-                <Row type="flex" justify="end" align="center" style={{paddingRight:28}}>
+                <Row type="flex" justify="end"  style={{paddingRight:28}}>
                     <Col span={2}>
                         <Badge dot >
                             <Icon type="notification" style={{fontSize:"20px"}}/>

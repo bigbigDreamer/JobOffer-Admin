@@ -13,28 +13,24 @@ export default class Home extends Component {
     state = {
         dataSource: [
             {
-                key: '1',
                 name: '58同城',
                 contact: "王彬林",
                 contactInformation: 15103914826,
                 ApplicationTime:"2019/10/1"
             },
             {
-                key: '1',
                 name: '字节跳动',
                 contact: "万伟亮",
                 contactInformation: 17394568957,
                 ApplicationTime:"2019/10/1"
             },
             {
-                key: '1',
                 name: '阿里巴巴',
                 contact: "王杰",
                 contactInformation: 13356897546,
                 ApplicationTime:"2019/10/1"
             },
             {
-                key: '1',
                 name: '京东商城',
                 contact: "张田伟",
                 contactInformation: 18856984756,

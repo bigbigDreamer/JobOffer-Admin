@@ -11,26 +11,27 @@ export const request = (
          * @author  Eric Wang <vuejs@vip.qq.com>
          * @desc   ajax get请求
          * @param url {String} -请求地址
-         * @param data {Object} -请求数据
+         * @param config
          * @return Promise
          */
-        function get(url, data) {
+        function get(url, config) {
 
             // 合并用户自定义配置
-            data = Object.assign({
-                body: data, // must match 'Content-Type' header
+            config ? config = Object.assign({
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'same-origin', // include, same-origin, *omit
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                mode: 'cors', // no-cors, cors, *same-origin
-                redirect: 'follow', // manual, *follow, error
-                referrer: 'no-referrer', // *client, no-referrer
-            }, data);
+            }, config) : config =
+                {
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                };
 
             // 合并url请求
-            url += baseUrl;
+            url = baseUrl + url;
 
-            return fetch(url, data)
+            // console.log(url,config)
+
+            return fetch(url, config)
                 .then(res => res.json())
         }
 
@@ -40,25 +41,27 @@ export const request = (
          * @desc   ajax post请求
          * @param url {String} -请求地址
          * @param data {Object} -请求数据
+         * @param config  {Object} -请求配置
          * @return Promise
          */
-        function post(url, data) {
+        function post(url, data, config) {
 
             // 合并用户自定义配置
-            data = Object.assign({
-                body: data, // must match 'Content-Type' header
+            !config ? config =
+                {
+                    body: JSON.stringify(data), // must match 'Content-Type' header
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cachedt
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                } : config = Object.assign({
+                body: JSON.stringify(data), // must match 'Content-Type' header
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'same-origin', // include, same-origin, *omit
-                method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                mode: 'cors', // no-cors, cors, *same-origin
-                redirect: 'follow', // manual, *follow, error
-                referrer: 'no-referrer', // *client, no-referrer
-            }, data);
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            }, config);
 
             // 合并url请求
-            url += baseUrl;
+            url = baseUrl + url;
 
-            return fetch(url, data)
+            return fetch(url, config)
                 .then(res => res.json())
         }
 

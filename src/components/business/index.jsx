@@ -1,6 +1,7 @@
 import React, {Component} from "react"
-import {Tabs,Select,Table,Button} from 'antd';
+import {Tabs, Select, Table, Button} from 'antd';
 import "./business.less"
+import {findAll} from "../../apis/business"
 
 const {Option} = Select;
 const provinceData = ['甘肃省', '江苏省'];
@@ -22,28 +23,33 @@ export default class Business extends Component {
         columns: [
             {
                 title: '企业名称',
-                dataIndex: 'companyName',
-                render: text => <a>{text}</a>,
+                dataIndex: 'name',
+                key: 'name'
             },
             {
                 title: '联系人',
-                dataIndex: 'age',
+                dataIndex: 'contactName',
+                key: 'contactName'
             },
             {
                 title: '联系方式',
-                dataIndex: 'address',
+                dataIndex: 'contactPhone',
+                key: 'contactPhone',
             },
             {
                 title: '行业',
-                dataIndex: 'address',
+                dataIndex: 'industry',
+                key: 'industry',
             },
             {
                 title: '所在地',
-                dataIndex: 'address',
+                dataIndex: 'location',
+                key: 'location',
             },
             {
                 title: '公司规模',
-                dataIndex: 'address',
+                dataIndex: 'scale',
+                key: 'scale',
             },
             {
                 title: '详情',
@@ -57,10 +63,11 @@ export default class Business extends Component {
             {
                 title: '操作',
                 key: 'option',
-                render: (text,record) => {
+                render: (text, record) => {
                     return (
                         <div>
                             <Button type={"primary"} size={"small"}>修改</Button>
+                            &nbsp;
                             <Button type={"danger"} size={"small"}>删除</Button>
                         </div>
                     )
@@ -69,30 +76,23 @@ export default class Business extends Component {
         ],
         data: [
             {
-                key: '1',
-                name: 'John Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
+                "id": 2355,
+                "name": "蒙牛伊利5599",
+                "contactName": "钱多多",
+                "contactPhone": "10086",
+                "industry": "",
+                "location": "江苏",
+                "scale": "500-1000人",
+                "establishedTime": "",
+                "registeredCapital": "",
+                "description": "",
+                "businessLicense": "",
+                "status": "待审核",
+                "province": null,
+                "city": null
             },
-            {
-                key: '2',
-                name: 'Jim Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-            },
-            {
-                key: '3',
-                name: 'Joe Black',
-                age: 32,
-                address: 'Sidney No. 1 Lake Park',
-            },
-            {
-                key: '4',
-                name: 'Disabled User',
-                age: 99,
-                address: 'Sidney No. 1 Lake Park',
-            },
-        ]
+        ],
+        loading: true
     };
 
     handleProvinceChange = value => {
@@ -112,8 +112,21 @@ export default class Business extends Component {
 
     };
 
+    componentDidMount() {
+        findAll()
+            .then(data => {
+                if (data) {
+                    this.setState({
+                        data: data.data,
+                        loading: false
+                    })
+                }
+
+            })
+    }
+
     render() {
-        const {cities,columns,data } = this.state;
+        const {cities, columns, data, loading} = this.state;
         const rowSelection = {
             onChange: (selectedRowKeys, selectedRows) => {
                 console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -127,7 +140,7 @@ export default class Business extends Component {
         return (
             <div className="business">
                 <Tabs
-                    style={{boxShadow: '0 0 8px #ededed', height: '100%',padding:"0 18px"}}
+                    style={{boxShadow: '0 0 8px #ededed', height: '100%', padding: "0 18px"}}
                     defaultActiveKey="1"
                     onChange={callback}>
                     <TabPane tab="商家列表" key="1">
@@ -188,7 +201,11 @@ export default class Business extends Component {
                             </Select>
                         </div>
                         <div className="table">
-                            <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                            <Table
+                                rowSelection={rowSelection}
+                                columns={columns}
+                                loading={loading}
+                                dataSource={data}/>
                         </div>
                     </TabPane>
                 </Tabs>,
