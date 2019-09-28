@@ -80,6 +80,7 @@ export default class Home extends Component {
                 render:_ =>(
                     <div>
                         <Button type={"success"} size={"small"}>通过</Button>
+                        &nbsp;
                         <Button type={"danger"} size={"small"}>拒绝</Button>
                     </div>
                 )
