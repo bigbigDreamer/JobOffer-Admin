@@ -68,7 +68,7 @@ export default class Business extends Component {
                 render: (text, record) => {
                     return (
                         <div>
-                            <Button type={"primary"} size={"small"}>修改</Button>
+                            <Button type={"primary"} size={"small"} onClick={() => this.handleUpdate(record)}>修改</Button>
                             &nbsp;
                             <Button type={"danger"} size={"small"} onClick={() => this.handleDel(record)}>删除</Button>
                         </div>
@@ -100,7 +100,7 @@ export default class Business extends Component {
         // 模态框
         visible: false,
         // 模态框数据
-        modalData: {}
+        modalData: {},
     };
 
     // 改变省份
@@ -134,7 +134,7 @@ export default class Business extends Component {
             cancelText: '取消',
             onOk: () => {
                 deleteById({
-                    id: data.id
+                    id: 8888
                 })
                     .then(data => {
                         // console.log(data, "删除");
@@ -162,7 +162,6 @@ export default class Business extends Component {
         });
     };
 
-
     // 模态框事件
     showModal = (data) => {
         // console.log(data);
@@ -189,6 +188,7 @@ export default class Business extends Component {
         });
     };
 
+
     // 组件挂在完毕
     componentDidMount() {
 
@@ -206,7 +206,7 @@ export default class Business extends Component {
     }
 
     render() {
-        const {cities, columns, data, loading, visible, modalData} = this.state;
+        const {cities, columns, data, loading, visible, modalData,visibleUpdate} = this.state;
 
         // 选中行
         const rowSelection = {
@@ -289,6 +289,9 @@ export default class Business extends Component {
                                 rowSelection={rowSelection}
                                 columns={columns}
                                 loading={loading}
+                                pagination={{
+                                    pageSize:5
+                                }}
                                 dataSource={data}/>
                             {/*详细信息模态框*/}
                             <Modal

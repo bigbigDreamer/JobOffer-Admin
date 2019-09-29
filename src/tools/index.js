@@ -1,10 +1,12 @@
 export const request = (
     /*
      * 使用fetch发送ajax，减少第三方依赖
+     *
      */
     _ => {
         // baseUrl
-        const baseUrl = 'http://47.94.45.249:666/';
+        // const baseUrl = 'http://47.94.45.249:666/';
+        const baseUrl = 'http://203.195.246.58:7777/';
 
         /**
          * @time  2019/9/28 15:02
@@ -48,16 +50,26 @@ export const request = (
 
             // 合并用户自定义配置
             !config ? config =
-                {
-                    body: JSON.stringify(data), // must match 'Content-Type' header
-                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cachedt
+                    {
+                        body: JSON.stringify(data), // must match 'Content-Type' header
+                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cachedt
+                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                        headers: {
+                            // "Content-Type": 'application/json'
+                            "content-type": 'application/x-www-form-urlencoded'
+                        }
+                    } :
+                config = Object.assign({
+                    body: data, // must match 'Content-Type' header
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
                     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                } : config = Object.assign({
-                body: JSON.stringify(data), // must match 'Content-Type' header
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            }, config);
+                    headers: {
+                        // "content-type": 'application/json'
+                        "content-type": 'application/x-www-form-urlencoded'
+                    }
+                }, config);
 
+            // console.log(typeof config.body, "post请求")
             // 合并url请求
             url = baseUrl + url;
 
